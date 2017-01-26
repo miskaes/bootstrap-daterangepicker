@@ -1,0 +1,6 @@
+bower_components
+*.sublime-workspace
+*.sublime-project
+package.js
+*.md
+*.html
