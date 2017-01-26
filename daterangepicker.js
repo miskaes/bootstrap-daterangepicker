@@ -160,7 +160,12 @@
                 firstDay: moment.localeData()._week.dow
             };
 
+            this.disableClickEventPropagation = false;
+
             this.cb = function () { };
+
+            if (typeof options.disableClickEventPropagation === 'boolean')
+                this.disableClickEventPropagation = options.disableClickEventPropagation;
 
             if (typeof options.format === 'string')
                 this.format = options.format;
@@ -786,6 +791,7 @@
         },
 
         clickPrev: function (e) {
+            if (this.disableClickEventPropagation) e.stopPropagation();
             var cal = $(e.target).parents('.calendar');
             if (cal.hasClass('left')) {
                 this.leftCalendar.month.subtract(1, 'month');
@@ -796,6 +802,7 @@
         },
 
         clickNext: function (e) {
+            if (this.disableClickEventPropagation) e.stopPropagation();
             var cal = $(e.target).parents('.calendar');
             if (cal.hasClass('left')) {
                 this.leftCalendar.month.add(1, 'month');
@@ -840,6 +847,7 @@
         },
 
         clickDate: function (e) {
+            if (this.disableClickEventPropagation) e.stopPropagation();
             var title = $(e.target).attr('data-title');
             var row = title.substr(1, 1);
             var col = title.substr(3, 1);
